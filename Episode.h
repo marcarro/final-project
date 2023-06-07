@@ -6,10 +6,10 @@
 class Episode : public Video {
 public:
   Episode();
-  Episode(string, string, string, string, string, string, string);
+  Episode(string id, string length, string genre, string name, string rating, string ntitle, string nseason);
 
   string getTitle();
-  string getSeason();
+  string getSeason() override;
 
   void setTitle(string newTitle);
   void setSeason(string newSeason);
