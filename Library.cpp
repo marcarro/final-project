@@ -35,6 +35,11 @@ void Library::print() {
 }
 
 void Library::printByRating(string rating) {
+  if (!validateRating(rating)) {
+    cout << "Invalid rating. Please enter a number between 0.0 and 10.0." << endl;
+    return;
+  }
+
   for (auto video : videos) {
     if (video->getRating() == rating) {
       cout << video->getName() << "\n";
@@ -43,6 +48,11 @@ void Library::printByRating(string rating) {
 }
 
 void Library::printByGenre(string genre) {
+  if (!validateGenre(genre)) {
+    cout << "No videos of genre " << genre << " found." << endl;
+    return;
+  }
+
   for (auto video : videos) {
     if (video->getGenre() == genre) {
       cout << video->getName() << "\n";
@@ -52,6 +62,16 @@ void Library::printByGenre(string genre) {
 }
 
 void Library::printBySeriesAndRating(string seriesName, string rating) {
+  if (!validateSeriesName(seriesName)) {
+    cout << "No series with the name " << seriesName << " found." << endl;
+    return;
+  }
+
+  if (!validateRating(rating)) {
+    cout << "Invalid rating. Please enter a number between 0.0 and 10.0." << endl;
+    return;
+  }
+
   for (auto video : videos) {
     Episode* episode = dynamic_cast<Episode*>(video);
     if (episode != nullptr && episode->getName() == seriesName && episode->getRating() == rating) {
@@ -62,6 +82,11 @@ void Library::printBySeriesAndRating(string seriesName, string rating) {
 }
 
 void Library::printMoviesByRating(string rating) {
+  if (!validateRating(rating)) {
+    cout << "Invalid rating. Please enter a number between 0.0 and 10.0." << endl;
+    return;
+  }
+  
   for (auto video : videos) {
     Movie* movie = dynamic_cast<Movie*>(video);
     if (movie != nullptr && movie->getRating() == rating) {
@@ -125,5 +150,30 @@ bool Library::validateRating(const string& rating) {
   } catch (...) {
       // if conversion to double failed return false
   }
+  return false;
+}
+
+bool Library::validateGenre(const string& genre) {
+  // Loop over all videos to find the one with the entered genre
+  for (auto video : videos) {
+    if (video->getGenre() == genre) {
+      // If a video with the genre is found, return true
+      return true;
+    }
+  }
+  // If no video with the entered genre is found, return false
+  return false;
+}
+
+bool Library::validateSeriesName(const string& seriesName) {
+  // Loop over all videos to find the one with the entered series name
+  for (auto video : videos) {
+    Episode* episode = dynamic_cast<Episode*>(video);
+    if (episode != nullptr && episode->getName() == seriesName) {
+      // If a video with the series name is found, return true
+      return true;
+    }
+  }
+  // If no video with the entered series name is found, return false
   return false;
 }

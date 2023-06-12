@@ -4,6 +4,7 @@
 using namespace std;
 
 int main() {
+  // Change method arguments to test input validation !
   Library lib;
   cout << "printByRating(): \n";
   lib.printByRating("0");

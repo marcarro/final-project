@@ -20,6 +20,8 @@ private:
   vector<Video*> videos;
   bool validateTitle(const string& title);
   bool validateRating(const string& rating);
+  bool validateGenre(const string& genre);
+  bool validateSeriesName(const string& seriesName);
 };
 
 #endif
