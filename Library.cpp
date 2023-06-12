@@ -78,9 +78,19 @@ void Library::rateVideo() {
   cout << "Enter the title of the video you wish to rate: ";
   cin >> title;
 
+  if (!validateTitle(title)) {
+    cout << "No video with the title " << title << " was found." << endl;
+    return;
+  }
+
   // Ask user for the rating
-  cout << "Enter your rating: ";
+  cout << "Enter your rating (0.0 to 10.0): ";
   cin >> rating;
+
+  if (!validateRating(rating)) {
+    cout << "Invalid rating. Please enter a number between 0.0 and 10.0." << endl;
+    return;
+  }
 
   // Loop over all videos to find the one with the entered title
   for (auto video : videos) {
@@ -91,7 +101,29 @@ void Library::rateVideo() {
       return;
     }
   }
+}
 
-  // If no video with the entered title is found, print a message
-  cout << "No video with the title \"" << title << "\" was found." << endl;
+bool Library::validateTitle(const string& title) {
+  // Loop over all videos to find the one with the entered title
+  for (auto video : videos) {
+    if (video->getName() == title) {
+      // If the video is found, return true
+      return true;
+    }
+  }
+  // If no video with the entered title is found, return false
+  return false;
+}
+
+bool Library::validateRating(const string& rating) {
+  // Check if the rating is a number between 0 and 10
+  try {
+    double ratingValue = stod(rating);
+    if (ratingValue >= 0.0 && ratingValue <= 10.0) {
+      return true;
+    }
+  } catch (...) {
+      // if conversion to double failed return false
+  }
+  return false;
 }

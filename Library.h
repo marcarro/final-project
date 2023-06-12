@@ -18,6 +18,8 @@ public:
   void rateVideo();
 private:
   vector<Video*> videos;
+  bool validateTitle(const string& title);
+  bool validateRating(const string& rating);
 };
 
 #endif
