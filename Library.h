@@ -15,6 +15,7 @@ public:
   void printByGenre(string genre);
   void printBySeriesAndRating(string seriesName, string rating);
   void printMoviesByRating(string rating);
+  void rateVideo();
 private:
   vector<Video*> videos;
 };

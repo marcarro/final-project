@@ -35,11 +35,11 @@ void Library::print() {
 }
 
 void Library::printByRating(string rating) {
-    for (auto video : videos) {
-        if (video->getRating() == rating) {
-            cout << video->getName() << "\n";
-        }
+  for (auto video : videos) {
+    if (video->getRating() == rating) {
+      cout << video->getName() << "\n";
     }
+  }
 }
 
 void Library::printByGenre(string genre) {
@@ -62,10 +62,36 @@ void Library::printBySeriesAndRating(string seriesName, string rating) {
 }
 
 void Library::printMoviesByRating(string rating) {
-    for (auto video : videos) {
-        Movie* movie = dynamic_cast<Movie*>(video);
-        if (movie != nullptr && movie->getRating() == rating) {
-            cout << movie->getName() << "\n";
-        }
+  for (auto video : videos) {
+    Movie* movie = dynamic_cast<Movie*>(video);
+    if (movie != nullptr && movie->getRating() == rating) {
+      cout << movie->getName() << "\n";
     }
+  }
+}
+
+void Library::rateVideo() {
+  string title;
+  string rating;
+
+  // Ask user for the title
+  cout << "Enter the title of the video you wish to rate: ";
+  cin >> title;
+
+  // Ask user for the rating
+  cout << "Enter your rating: ";
+  cin >> rating;
+
+  // Loop over all videos to find the one with the entered title
+  for (auto video : videos) {
+    if (video->getName() == title) {
+      // When the video is found, update its rating
+      video->setRating(rating);
+      cout << "You rated the video " << title << " with a rating of " << rating << endl;
+      return;
+    }
+  }
+
+  // If no video with the entered title is found, print a message
+  cout << "No video with the title \"" << title << "\" was found." << endl;
 }
