@@ -7,6 +7,8 @@ class Movie : public Video {
 public:
   Movie();
   Movie(string id, string length, string genre, string name, string rating);
+
+  void printDetails() override;
 };
 
 #endif

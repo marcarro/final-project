@@ -19,3 +19,9 @@ void Video::setLength(string newLength) { length = newLength; }
 void Video::setGenre(string newGenre) { genre = newGenre; }
 void Video::setName(string newName) { name = newName; }
 void Video::setRating(string newRating) { rating = newRating; }
+
+std::ostream& operator<<(std::ostream& os, const Video &video) {
+  os << "ID: " << video.id << ", Length: " << video.length << ", Genre: " << video.genre
+     << ", Name: " << video.name << ", Rating: " << video.rating;
+  return os;
+}

@@ -14,3 +14,16 @@ string Episode::getSeason() { return season; }
 
 void Episode::setTitle(string newTitle) { title = newTitle; }
 void Episode::setSeason(string newSeason) { season = newSeason; }
+
+void Episode::printDetails() {
+  using namespace std;
+  cout << "ID: " << getId() << ", Length: " << getLength() << ", Genre: " << getGenre()
+       << ", Name: " << getName() << ", Rating: " << getRating() << ", Title: " << getTitle() 
+       << ", Season: " << getSeason() << endl;
+}
+
+ostream& operator<<(ostream& os, const Episode& ep) {
+  os << static_cast<const Video&>(ep);
+  os << " Title: " << ep.title << ", Season: " << ep.season;
+  return os;
+}

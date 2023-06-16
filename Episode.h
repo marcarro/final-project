@@ -1,6 +1,5 @@
 #ifndef EPISODE_H
 #define EPISODE_H
-
 #include "Video.h"
 
 class Episode : public Video {
@@ -13,6 +12,9 @@ public:
 
   void setTitle(string newTitle);
   void setSeason(string newSeason);
+
+  friend ostream& operator<<(ostream& os, const Episode& ep);
+  void printDetails() override;
 private:
   string title, season;
 };
